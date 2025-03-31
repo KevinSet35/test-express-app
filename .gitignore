@@ -1,0 +1,35 @@
+# Node modules
+node_modules/
+
+# Output directories
+dist/
+build/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Logs
+logs/
+*.log
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage
+coverage/
+
+# dotenv environment files
+.env
+.env.*
+
+# Ignore local development CSVs
+*.csv
+
+# macOS metadata
+.DS_Store
+
+# VSCode settings (optional, if you're not sharing workspace config)
+.vscode/
