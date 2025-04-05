@@ -16,6 +16,14 @@ interface PolicyPayload {
     [key: string]: any;
 }
 
+function simulateCpuBoundWork(durationMs: number) {
+    const start = Date.now();
+    while (Date.now() - start < durationMs) {
+        // Simulate CPU-intensive task
+        Math.sqrt(Math.random() * 1000);
+    }
+}
+
 app.post('/create-policy', (req, res) => {
     const handleRequest = async () => {
         const payload = req.body as PolicyPayload;
@@ -24,7 +32,9 @@ app.post('/create-policy', (req, res) => {
         // console.log('API B received:', payload);
 
         // Simulate heavy logic (500ms delay)
-        await new Promise((resolve) => setTimeout(resolve, 100));
+        // await new Promise((resolve) => setTimeout(resolve, 100));
+        // Simulate CPU-bound work for 1 second
+        simulateCpuBoundWork(1000);
 
         // Simulate failure for testing
         if (payload.shouldFail) {

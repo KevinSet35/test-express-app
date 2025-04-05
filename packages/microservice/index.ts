@@ -35,7 +35,7 @@ const processorFast = new PolicyProcessorFast();
 app.post('/transform-policy-fast', async (_req: Request, res: Response) => {
 
     try {
-        const policies = await new CSVLoader().loadCSV(csvPath);
+        const policies = await new CSVLoader().loadCSV(csvPath, 20);
         console.log(`📥 Loaded ${policies.length} policies from CSV`);
 
         const { results, duration } = await processorFast.processAll(policies);
@@ -57,7 +57,7 @@ const processorSlow = new PolicyProcessorSlow();
 app.post('/transform-policy-slow', async (_req: Request, res: Response) => {
 
     try {
-        const policies = await new CSVLoader().loadCSV(csvPath, 1000);
+        const policies = await new CSVLoader().loadCSV(csvPath, 20);
         console.log(`📥 Loaded ${policies.length} policies from CSV`);
 
         const { results, duration } = await processorSlow.processAll(policies);
@@ -75,6 +75,8 @@ app.post('/transform-policy-slow', async (_req: Request, res: Response) => {
 
 app.listen(PORT, () => {
     console.log(`🚀 Microservice running on http://localhost:${PORT}`);
+    // const os = require('os');
+    // console.log(os.cpus().length);
 });
 
 

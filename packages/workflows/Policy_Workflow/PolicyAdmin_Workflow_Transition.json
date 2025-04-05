@@ -1,0 +1,59 @@
+{
+    "workflow": "InsurancePolicyWorkflow",
+    "blocks": [
+        {
+            "preRequirement": "START",
+            "activity": {
+                "activityId": "ValidatePolicy",
+                "script": "validatePolicy.ts",
+                "activityCode": "VALID"
+            },
+            "postRequirement": "PolicyValidated"
+        },
+        {
+            "preRequirement": "START",
+            "activity": {
+                "activityId": "ValidatePolicy",
+                "script": "validatePolicy.ts",
+                "activityCode": "INVALID"
+            },
+            "postRequirement": "PolicyRejected"
+        },
+        {
+            "preRequirement": "PolicyValidated",
+            "activity": {
+                "activityId": "ProcessPolicy",
+                "script": "processPolicy.ts",
+                "activityCode": "PROCESSED"
+            },
+            "postRequirement": "PolicyProcessed"
+        },
+        {
+            "preRequirement": "PolicyValidated",
+            "activity": {
+                "activityId": "ProcessPolicy",
+                "script": "processPolicy.ts",
+                "activityCode": "PENDING"
+            },
+            "postRequirement": "PolicyPendingReview"
+        },
+        {
+            "preRequirement": "PolicyProcessed",
+            "activity": {
+                "activityId": "FinalizePolicy",
+                "script": "finalizePolicy.ts",
+                "activityCode": "FINALIZED"
+            },
+            "postRequirement": "PolicyFinalized"
+        },
+        {
+            "preRequirement": "PolicyRejected",
+            "activity": {
+                "activityId": "HandleRejection",
+                "script": "handleRejection.ts",
+                "activityCode": "RETRY"
+            },
+            "postRequirement": "RejectionHandled"
+        }
+    ]
+}

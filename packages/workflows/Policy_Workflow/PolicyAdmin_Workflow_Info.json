@@ -1,0 +1,7 @@
+{
+    "workflow": "InsurancePolicyWorkflow",
+    "entryPoint": {
+        "startBlock": "Block1",
+        "initialPreRequirement": "START"
+    }
+}
